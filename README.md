@@ -1,3 +1,5 @@
+# Projeto do curso FreecodeCamp Laravel e Vue 
+https://www.youtube.com/watch?v=Wn3IPX_ax-0
 # O que aprende nesse projeto 
 
   - Migrate com chave estrageiras 
