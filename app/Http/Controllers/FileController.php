@@ -13,4 +13,9 @@ class FileController extends Controller
     {
         return Inertia::render(component:"MyFiles");
     }
+
+    public function createFolder()
+    {
+        
+    }
 }
