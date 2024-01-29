@@ -25,8 +25,16 @@ Route::get('/', function () {
     ]);
 });
 
+// Route file manager
+Route::controller(\App\Http\Controllers\FileController::class)
+->middleware(['auth' , 'verified'])->group(function(){
+  Route::get('/my-files' , 'myFiles')->name('myFiles');
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
+
+
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
