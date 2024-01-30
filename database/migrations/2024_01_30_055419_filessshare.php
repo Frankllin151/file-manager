@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('starred_files', function (Blueprint $table) {
+        Schema::create('file_shares', function (Blueprint $table) {
             $table->id();
             $table->foreignId('file_id')->nullable()->constrained('files');
-            $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->foreignUuid('user_id')->nullable()->constrained('users');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('starred_files');
+        Schema::dropIfExists('file_shares');
     }
 };

@@ -8,14 +8,14 @@ trait HasCreatorAndUpdater {
     protected static  function bootHasCreatorAndUpdater()
     {
         static::creating(function($model){
-            $model->created_by  = Auth::id();
-            $model->update_by  = Auth::id();
+            $model->created_by  = Auth::user()->id;
+            $model->update_by  = Auth::user()->id;
 
         });
 
         static::updating(function($model){
-            $model->created_by  = Auth::id();
-            $model->update_by  = Auth::id();
+            $model->created_by  = Auth::user()->id;
+            $model->update_by  = Auth::user()->id;
 
         });
     }

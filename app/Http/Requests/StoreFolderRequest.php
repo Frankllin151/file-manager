@@ -3,8 +3,12 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\File;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ParentIdBaseRequest;
 
-class StoreFolderRequest extends FormRequest
+class StoreFolderRequest extends ParentIdBaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,8 +25,22 @@ class StoreFolderRequest extends FormRequest
      */
     public function rules(): array
     {
+        return array_merge(parent::rules(),
+            [
+                'name' => [
+                    'required',
+                    Rule::unique(File::class, 'name')
+                        ->where('created_by', Auth::user()->id)
+                        ->where('parent_id', $this->parent_id)
+                        ->whereNull('deleted_at')
+                ]
+            ]
+        );
+    }
+    public function messages()
+    {
         return [
-           'name' => ['required']
+            'name.unique' => 'Folder ":input" already exists'
         ];
     }
 }

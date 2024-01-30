@@ -6,3 +6,4 @@ https://www.youtube.com/watch?v=Wn3IPX_ax-0
   - Instalação correta do vue.js dentro do laravel 
   
 # bug -> table updata_by -> route register
+# bug -> not insert dado in table file
