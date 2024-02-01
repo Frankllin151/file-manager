@@ -2,26 +2,19 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Models\File;
-use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\ParentIdBaseRequest;
+use Illuminate\Validation\Rule;
 
 class StoreFolderRequest extends ParentIdBaseRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
 
+   
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
     {
@@ -30,13 +23,15 @@ class StoreFolderRequest extends ParentIdBaseRequest
                 'name' => [
                     'required',
                     Rule::unique(File::class, 'name')
-                        ->where('created_by', Auth::user()->id)
+                        ->where('created_by', Auth::id())
                         ->where('parent_id', $this->parent_id)
                         ->whereNull('deleted_at')
                 ]
             ]
         );
+        
     }
+
     public function messages()
     {
         return [

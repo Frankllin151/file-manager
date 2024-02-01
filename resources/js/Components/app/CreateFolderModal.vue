@@ -53,9 +53,10 @@ import { ref,nextTick } from "vue";
 const form = useForm({
     name: '',
     parent_id: null
+  
 })
 // Refs 
-const folderNameInput = ref(null);
+var folderNameInput = ref(null);
 // Props & Emit
 const {modelValue} = defineProps({
     modelValue: Boolean
@@ -86,11 +87,20 @@ function createFolder()
     preserveScroll:true, 
     onSuccess: () =>{
         closeModal()
-        form.reset()
+      
 
         // show sucess notification
     }, 
-    onError: () => folderNameInput.value.focus()
+    
+    onError: () => {
+      nextTick(() => {
+    if (folderNameInput.value) {
+      // Check if folderNameInput is not null or undefined before calling focus
+      folderNameInput.value.focus();
+    }
+    
+  });
+}
  })
 }
 

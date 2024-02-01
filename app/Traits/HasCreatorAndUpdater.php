@@ -9,13 +9,13 @@ trait HasCreatorAndUpdater {
     {
         static::creating(function($model){
             $model->created_by  = Auth::user()->id;
-            $model->update_by  = Auth::user()->id;
+            $model->updated_by  = Auth::user()->id;
 
         });
 
         static::updating(function($model){
             $model->created_by  = Auth::user()->id;
-            $model->update_by  = Auth::user()->id;
+            $model->updated_by  = Auth::user()->id;
 
         });
     }

@@ -23,8 +23,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Kalnoy\Nestedset\NodeTrait;
 use Inertia\Inertia;
-
 class FileController extends Controller
 {
     //
@@ -34,25 +34,26 @@ class FileController extends Controller
         return Inertia::render(component:"MyFiles");
     }
 
-    public function createFolder(StoreFolderRequest $request)
+   public function createFolder(StoreFolderRequest $request)
     {
-              $data = $request->validated();
-              $parent = $request->parent;
-              
-            if(!$parent){
-                $parent = $this->getRoot();
-            }
+        $data = $request->validated();
+        $parent = $request->parent;
 
+        if (!$parent) {
+            $parent = $this->getRoot();
+        }
 
-            $file = new File();
-            $file->is_folder = 1;
-            $file->name = $data['name'];
+        $file = new File();
+        $file->is_folder = 1;
+        $file->name = $data['name'];
 
-            $parent->appendNode($file);
+        $parent->appeNode($file);
+      
     }
+    
 
     private function getRoot()
     {
-        return File::query()->where('created_by' , Auth::id())->whereIsRoot()->firstOrFail();
+        return File::query()->where('created_by' , Auth::user()->id)->whereIsRoot()->firstOrFail();
     }
 }
