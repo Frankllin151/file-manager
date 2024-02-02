@@ -44,22 +44,25 @@ import Modal from "@/Components/Modal.vue";
 import InputLabel from "../InputLabel.vue";
 import TextInput from "../TextInput.vue";
 import InputError from '../InputError.vue';
-import { useForm } from "@inertiajs/vue3";
+import { useForm  } from "@inertiajs/vue3";
 import SecondaryButton from "../SecondaryButton.vue";
 import PrimaryButton from '../PrimaryButton.vue';
 
-import { ref,nextTick } from "vue";
+import { ref,nextTick , onBeforeMount  } from "vue";
 // Uses
 const form = useForm({
-    name: '',
-    parent_id: null
+
+  name: '',
+    parent_id: null //number id file
   
-})
+}) 
+
+
 // Refs 
 var folderNameInput = ref(null);
 // Props & Emit
 const {modelValue} = defineProps({
-    modelValue: Boolean
+    modelValue: Boolean 
 })
 const emit = defineEmits(['update:modelValue'])
 

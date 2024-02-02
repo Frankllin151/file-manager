@@ -16,16 +16,18 @@ class ParentIdBaseRequest extends FormRequest
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
-    {
-        $this->parent = File::query()->where('created_by', Auth::id())->first();
-$d = $this->parent['id'];
-        if ($this->parent && !$this->parent->isOwnedBy(Auth::id())) {
-            return false;
-        }
-     dd($d);
-    
+{
+    $this->parent = File::query()->where('created_by', Auth::id())->first();
+    $parent_idmain = $this->parent ? $this->parent->id : null;
+
+    if (!$parent_idmain) {
+        return false;
     }
 
+    $this->parent = File::find($parent_idmain); // Corrigindo a atribuição do modelo File
+
+    return true;
+}
     /**
      * Get the validation rules that apply to the request.
      *
