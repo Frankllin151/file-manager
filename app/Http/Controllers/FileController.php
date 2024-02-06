@@ -32,12 +32,14 @@ class FileController extends Controller
 
     public function myFiles()
     {
-        $file = File::query()->where('created_by', Auth::id())->first();
-      //   $b = $file ? $file->id : null;
-       //  dd($b);
-       return Inertia::render('MyFiles', [
-            'fileId' => $file ? $file->id : null,
-        ]);
+        $folder = $this->getRoot();
+    $files = File::query()
+      ->where('parent_id' , $folder->id)
+      ->where('created_by' , Auth::id())
+      ->orderBy('is_folder' , 'desc')
+      ->orderBy('created_at' , 'desc')
+      ->paginate(10);
+       return Inertia::render('MyFiles' , compact('files'));
     }
 
    public function createFolder(StoreFolderRequest $request)
@@ -60,9 +62,6 @@ class FileController extends Controller
 
     private function getRoot()
     {
-        $d = File::query()->where('created_by', Auth::id())->first();
-        $db = $d['id'];
-
-        return $db;
+        return File::query()->whereIsRoot()->where('created_by', Auth::id())->firstOrFail();
     }
 }
