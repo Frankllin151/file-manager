@@ -53,7 +53,7 @@ import { ref,nextTick , onBeforeMount  } from "vue";
 const form = useForm({
 
   name: '',
-  parent_id: null
+
   
 }) 
 const page = usePage();

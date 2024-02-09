@@ -30,17 +30,19 @@ class FileController extends Controller
 {
     //
 
-    public function myFiles(string $folder = null)
+    public function myFiles(Request $request, string $folder = null)
     {
         if($folder){
           $folder = File::query()->where('created_by' , Auth::id())
           ->where('path' , $folder)
           ->firstOrFail();
+
+         dd($folder);
         }
    
         if(!$folder){
         $folder = $this->getRoot();
-
+        
         }
        
     $files = File::query()
@@ -49,6 +51,8 @@ class FileController extends Controller
       ->orderBy('is_folder' , 'desc')
       ->orderBy('created_at' , 'desc')
       ->paginate(10);
+  
+    
 
       $files = FileResource::collection($files);
 
@@ -59,7 +63,7 @@ class FileController extends Controller
 
 
 
-    
+
    public function createFolder(StoreFolderRequest $request)
     {
         $data = $request->validated();
