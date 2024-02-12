@@ -50,10 +50,10 @@ import PrimaryButton from '../PrimaryButton.vue';
 
 import { ref,nextTick , onBeforeMount  } from "vue";
 // Uses
-const form = useForm({
+var form = useForm({
 
   name: '',
-
+  parent_id: null
   
 }) 
 const page = usePage();
@@ -71,33 +71,23 @@ const emit = defineEmits(['update:modelValue'])
 // methods
 
 
-function createFolder()
-{
 
+function createFolder() {
 
-    form.parent_id = page.props.folder.id;
+form.parent_id = page.props.folder.id
 
-     console.log(page.props.folder.id);
-  console.log(form.parent_id);
- form.post(route('folder.create'), {
-    preserveScroll:true, 
-    onSuccess: () =>{
+console.log(form.parent_id);
+
+form.post(route('folder.create'), {
+    preserveScroll: true,
+    onSuccess: () => {
         closeModal()
-      
+        // Show success notification
 
-        // show sucess notification
-    }, 
-    
-    onError: () => {
-      nextTick(() => {
-    if (folderNameInput.value) {
-      // Check if folderNameInput is not null or undefined before calling focus
-      folderNameInput.value.focus();
-    }
-    
-  });
-}
- })
+        form.reset();
+    },
+    onError: () => folderNameInput.value.focus()
+})
 }
 
 
