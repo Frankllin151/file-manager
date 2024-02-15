@@ -41,12 +41,12 @@ class FileController extends Controller
 
      
         }
-       // dd($folder);
+      
         if(!$folder){
         $folder = $this->getRoot();
-        
-        }
        
+        }
+      
     $files = File::query()
       ->where('parent_id' , $folder->id)
       ->where('created_by' , Auth::id())

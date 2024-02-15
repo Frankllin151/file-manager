@@ -47,24 +47,26 @@ import InputError from '../InputError.vue';
 import { useForm ,  usePage  } from "@inertiajs/vue3";
 import SecondaryButton from "../SecondaryButton.vue";
 import PrimaryButton from '../PrimaryButton.vue';
-
+import myFile from "@/Pages/MyFiles.vue";
 import { ref,nextTick , onBeforeMount  } from "vue";
 // Uses
 var form = useForm({
 
   name: '',
-  
+  parent_id: null 
   
 }) 
 const page = usePage();
+const idFolder = page.props.folder.data.id;
 
+console.log(idFolder);
 // Refs 
 var folderNameInput = ref(null);
 // Props & Emit
 const {modelValue} = defineProps({
     modelValue: Boolean 
 })
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue'] , ['folder'])
 
 // Computed
 
@@ -74,9 +76,9 @@ const emit = defineEmits(['update:modelValue'])
 
 function createFolder() {
 
-form.parent_id = page.props.folder.id
-const name = form.name;
-console.log(page.props.folder.id);
+form.parent_id = idFolder
+
+console.log(form.parent_id);
 
 form.post(route('folder.create'), {
     preserveScroll: true,

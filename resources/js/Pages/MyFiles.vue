@@ -98,15 +98,15 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { HomeIcon } from '@heroicons/vue/20/solid';
-
-import {router, useForm, usePage , Link} from "@inertiajs/vue3";
-// Props
-const { files } = defineProps({
+import {router, useForm, usePage} from "@inertiajs/vue3";
+import { ref } from 'vue';
+const { files, folder  } = defineProps({
    files: Object, 
    folder: Object, 
-   ancestors: Array
+   ancestors: Array, 
 });
-
+const page = usePage();
+const idFolder = page.props.folder.data.id;
 // Methods 
 
 function openFolder(file) {
