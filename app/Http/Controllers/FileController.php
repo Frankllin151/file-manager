@@ -56,10 +56,13 @@ class FileController extends Controller
   
   
 
-      $files = FileResource::collection($files);
+    $files = FileResource::collection($files);
+    
+    $ancestors = FileResource::collection([...$folder->ancestors , $folder]);
+    
+    $folder = new FileResource($folder);
 
-
-       return Inertia::render('MyFiles' , compact('files' , 'folder'));
+       return Inertia::render('MyFiles' , compact('files' , 'folder' , 'ancestors'));
     }
 
 
@@ -71,7 +74,7 @@ class FileController extends Controller
         $data = $request->validated();
         $parent = $request->parent;
 
-        if (!$parent) {
+        if (!isset($parent)) {
         $this->getRoot();
         }
 

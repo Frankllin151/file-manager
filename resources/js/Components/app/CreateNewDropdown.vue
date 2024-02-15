@@ -4,10 +4,12 @@
 import ResponsiveNavLink from "../ResponsiveNavLink.vue"
 
 import CreateFolderModal from "@/Components/app/CreateFolderModal.vue";
-
+import FolderUploadMenuItem from './FolderUploadMenuItem.vue';
+import FileUploadMenuItem from "./FileUploadMenuItem.vue";
 // Refs 
 // Refs
 import { ref } from 'vue';
+
 
 const createFolderModal = ref(false);
 
@@ -66,21 +68,11 @@ const createFolderModal = ref(false);
             </div>
                <div class="px-1 py-1">
               
-                <MenuItem v-slot="{ active }">
-                    <a href=""
-                    class="text-gray-700 block  px-4 text-sm"
-                    >  Upload Folder</a>
-                  </MenuItem>
-                
+              <FolderUploadMenuItem/>
               </div>
             
      <div class="px-1 py-1">
-        <MenuItem v-slot="{ active }">
-            <a href=""
-            class="text-gray-700 block  px-4 text-sm"
-            > Upload File</a>
-             
-         </MenuItem>
+       <FileUploadMenuItem/>
      </div>
              
             </MenuItems>
