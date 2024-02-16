@@ -1,8 +1,11 @@
 <template>
     <MenuItem v-slot="{ active }">
-        <a href=""
-        class="text-gray-700 block  px-4 text-sm"
-        >  Upload Folder</a>
+        <a href="#"
+        class="text-gray-700 block  px-4 text-sm "
+        >  Upload Folder
+  
+    
+    </a>
       </MenuItem>
     
 </template>

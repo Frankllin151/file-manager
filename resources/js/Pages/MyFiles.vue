@@ -2,8 +2,8 @@
 
    
    <AuthenticatedLayout>
-   <!---- <pre>{{ancestors}}</pre>-->
-
+   <!---<pre>{{ancestors}}</pre>--->
+   
   <nav class="flex items-center justify-between p-1 mb-3">
     <ol class="inline-flex items-center space-x-1 md:space-x-3">
         <li class="inline-flex items-center" 
@@ -98,13 +98,15 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { HomeIcon } from '@heroicons/vue/20/solid';
+import {Link} from '@inertiajs/vue3'
 import {router, useForm, usePage} from "@inertiajs/vue3";
-import { ref } from 'vue';
+
 const { files, folder  } = defineProps({
    files: Object, 
    folder: Object, 
    ancestors: Array, 
 });
+
 const page = usePage();
 const idFolder = page.props.folder.data.id;
 // Methods 

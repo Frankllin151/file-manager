@@ -68,12 +68,19 @@ const createFolderModal = ref(false);
             </div>
                <div class="px-1 py-1">
               
-              <FolderUploadMenuItem/>
+                <FileUploadMenuItem/>
+             
+              
               </div>
+              <div class="px-1 py-1">
+              
+             
+              <FolderUploadMenuItem/>
+              
+              </div>
+              
             
-     <div class="px-1 py-1">
-       <FileUploadMenuItem/>
-     </div>
+     
              
             </MenuItems>
           </transition>
