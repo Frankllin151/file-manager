@@ -1,15 +1,4 @@
-<script setup>
 
-import Navigation from "@/Components/app/Navigation.vue"
-import SearchForm from "@/Components/app/SearchForm.vue";
-import TextInput from "../Components/TextInput.vue";
-import UserSettingsDrodown from"@/Components/app/UserSettingsDropdown.vue";
-import { useForm } from "@inertiajs/vue3";
-
-const form = useForm({
-    search: ""
-})
-</script>
 
 <template>
     <div class="h-screen bg-gray-50 flex w-full gap-4 ">
@@ -36,6 +25,28 @@ const form = useForm({
     </main>
     </div>
 </template>
-<style>
 
-</style>
+<script setup>
+
+import Navigation from "@/Components/app/Navigation.vue"
+import SearchForm from "@/Components/app/SearchForm.vue";
+import TextInput from "../Components/TextInput.vue";
+import UserSettingsDrodown from"@/Components/app/UserSettingsDropdown.vue";
+import { useForm } from "@inertiajs/vue3";
+import { onMounted } from "vue";
+import { FILE_UPLOAD_STARTED, emitter } from "@/event-bus";
+
+const form = useForm({
+    search: ""
+})
+
+function uploadFiles()
+{
+    console.log(files);
+}
+
+
+onMounted(() =>{
+    emitter.on(FILE_UPLOAD_STARTED , uploadFiles)
+})
+</script>

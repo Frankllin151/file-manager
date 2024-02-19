@@ -59,7 +59,7 @@ var form = useForm({
 const page = usePage();
 const idFolder = page.props.folder.data.id;
 
-console.log(idFolder);
+
 // Refs 
 var folderNameInput = ref(null);
 // Props & Emit
