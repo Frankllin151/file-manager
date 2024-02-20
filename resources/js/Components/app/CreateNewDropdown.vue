@@ -1,27 +1,4 @@
-<script setup>
- import { ChevronDownIcon } from '@heroicons/vue/20/solid'
- import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-import ResponsiveNavLink from "../ResponsiveNavLink.vue"
 
-import CreateFolderModal from "@/Components/app/CreateFolderModal.vue";
-import FolderUploadMenuItem from './FolderUploadMenuItem.vue';
-import FileUploadMenuItem from "./FileUploadMenuItem.vue";
-// Refs 
-// Refs
-import { ref } from 'vue';
-
-
-const createFolderModal = ref(false);
-
-
-  function showCreateFolderModal(){
-   createFolderModal.value = true;
-
-  }
-
-
-
-</script>
 <template>
     <div class="">
         <Menu as="div" class="relative block text-left">
@@ -90,3 +67,28 @@ v-model="createFolderModal"
 />
       </div>
 </template>
+
+<script setup>
+ import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+import ResponsiveNavLink from "../ResponsiveNavLink.vue"
+
+import CreateFolderModal from "@/Components/app/CreateFolderModal.vue";
+import FolderUploadMenuItem from './FolderUploadMenuItem.vue';
+import FileUploadMenuItem from "./FileUploadMenuItem.vue";
+// Refs 
+// Refs
+import { ref } from 'vue';
+
+
+const createFolderModal = ref(false);
+
+
+  function showCreateFolderModal(){
+   createFolderModal.value = true;
+
+  }
+
+
+
+</script>

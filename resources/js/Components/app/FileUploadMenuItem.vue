@@ -16,7 +16,7 @@ import { FILE_UPLOAD_STARTED, emitter } from '@/event-bus.js';
 // Methods 
  function onChange(ev)
  {
-   console.log(ev.target.files);
+  
    emitter.emit(FILE_UPLOAD_STARTED , ev.target.files)
  }
 </script>
