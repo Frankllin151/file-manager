@@ -57,7 +57,7 @@ var form = useForm({
   
 }) 
 const page = usePage();
-const idFolder = page.props.folder.data.id;
+
 
 
 // Refs 
@@ -76,7 +76,7 @@ const emit = defineEmits(['update:modelValue'] , ['folder'])
 
 function createFolder() {
 
-form.parent_id = idFolder
+form.parent_id = page.props.folder.data.id
 
 console.log(form.parent_id);
 

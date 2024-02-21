@@ -11,7 +11,8 @@
        <main 
        class="flex flex-col flex-1 px-4 overflow-hidden">
        
-       <template v-if="dragOver" class="text-gray-500 text-center py-8 text-sm">  
+       <template class="text-gray-500 text-center py-8 text-sm"  
+       v-if="dragOver" >  
        
         Drop Files Here to Upload
        </template>
@@ -45,13 +46,25 @@ import Navigation from "@/Components/app/Navigation.vue"
 import SearchForm from "@/Components/app/SearchForm.vue";
 import TextInput from "../Components/TextInput.vue";
 import UserSettingsDrodown from"@/Components/app/UserSettingsDropdown.vue";
-import { useForm } from "@inertiajs/vue3";
+import { router, useForm , usePage} from "@inertiajs/vue3";
 import { onMounted , ref } from "vue";
 import { FILE_UPLOAD_STARTED, emitter } from "@/event-bus";
+
+
+//Uses
+const page = usePage();
+
+
+
 
 const form = useForm({
     search: ""
 })
+
+const fileUploadForm = useForm({
+    files:[] , 
+    parent_id: null
+});
 
 
 /// refs 
@@ -75,20 +88,28 @@ function onDragleave ()
 
 function handleDrop (ev)
 {
-const files =  ev.dataTransfer.files;
-console.log(files);
+    dragOver.value = false;
 
-if(!files.lenght){
- return
+    const files = ev.dataTransfer.files
+    console.log(ev);
+    console.log(files);
+    if (!files.length) {
+        return
+    }
+
+    uploadFiles(files)
 }
 
-uploadFiles(files);
-}
 
+console.log(page.props.folder.data.id);
 
 function uploadFiles(files)
 {
-    console.log(files);
+   fileUploadForm.parent_id = page.props.folder.data.id
+
+    fileUploadForm.files = files
+
+    fileUploadForm.post(route('file.store'));
 }
 
 onMounted(() =>{

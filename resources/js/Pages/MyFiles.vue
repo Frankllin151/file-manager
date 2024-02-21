@@ -107,8 +107,8 @@ const { files, folder  } = defineProps({
    ancestors: Array, 
 });
 
-const page = usePage();
-const idFolder = page.props.folder.data.id;
+
+
 // Methods 
 
 function openFolder(file) {

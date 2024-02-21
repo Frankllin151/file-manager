@@ -86,9 +86,19 @@ class FileController extends Controller
       
     }
     
-
+    public function store(StoreFileRequest $request)
+    {
+      $data = $request->validated(); 
+      dd($data);
+    }
+ 
+ 
     private function getRoot()
     {
         return File::query()->whereIsRoot()->where('created_by', Auth::id())->firstOrFail();
     }
+
+
+
+ 
 }
