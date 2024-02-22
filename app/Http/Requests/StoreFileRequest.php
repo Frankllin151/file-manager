@@ -17,7 +17,11 @@ class StoreFileRequest extends ParentIdBaseRequest
     {
         return false;
     }*/
-
+ 
+     protected function prepareForValidation()
+     {
+        
+     }
     /**
      * Get the validation rules that apply to the request.
      *

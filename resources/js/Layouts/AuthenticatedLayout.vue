@@ -63,6 +63,7 @@ const form = useForm({
 
 const fileUploadForm = useForm({
     files:[] , 
+    relative_paths:[],
     parent_id: null
 });
 
@@ -88,10 +89,9 @@ function onDragleave ()
 
 function handleDrop (ev)
 {
-    dragOver.value = false;
+    dragOver.value = true;
 
     const files = ev.dataTransfer.files
-    console.log(ev);
     console.log(files);
     if (!files.length) {
         return
@@ -101,14 +101,13 @@ function handleDrop (ev)
 }
 
 
-console.log(page.props.folder.data.id);
 
 function uploadFiles(files)
 {
    fileUploadForm.parent_id = page.props.folder.data.id
-
+ console.log(files);
     fileUploadForm.files = files
-
+     fileUploadForm.relative_paths = [...files].map(f => f.webkitRelativePath);
     fileUploadForm.post(route('file.store'));
 }
 
